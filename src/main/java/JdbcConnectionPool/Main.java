@@ -21,22 +21,40 @@ public class Main {
      */
     public static void main(String[] args) {
         System.out.println("Hello Connection Pool");
-        
+
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+
         try {
-            
-            Connection connection = DatabaseConnectionPoolManager.getConnection();
-            Statement statement = connection.createStatement();
+
+            connection = DatabaseConnectionPoolManager.getConnection();
+            statement = connection.createStatement();
             String sql = "SELECT * FROM student";
-            ResultSet resultSet = statement.executeQuery(sql);
-            
+            resultSet = statement.executeQuery(sql);
+
             while (resultSet.next()) {
                 System.out.println(resultSet.getString("email"));
             }
-            
-            
+
         } catch (SQLException ex) {
             ex.printStackTrace();
+        } finally {
+
+            if (resultSet != null) try {
+                resultSet.close();
+            } catch (SQLException ignore) {
+            }
+            if (statement != null) try {
+                statement.close();
+            } catch (SQLException ignore) {
+            }
+            if (connection != null) try {
+                connection.close();
+            } catch (SQLException ignore) {
+            }
+
         }
     }
-    
+
 }
