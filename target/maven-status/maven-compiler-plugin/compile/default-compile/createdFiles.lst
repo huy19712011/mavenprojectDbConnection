@@ -1,2 +1,4 @@
 JdbcConnectionPool\DatabaseConnectionPoolManager.class
+JdbcConnectionPool2\Main.class
+JdbcConnectionPool2\DatabaseConnectionPoolManager.class
 JdbcConnectionPool\Main.class
